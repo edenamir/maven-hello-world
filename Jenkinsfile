@@ -1,30 +1,33 @@
 pipeline {
     agent any
 
-        stage('Bump version') {
-        steps {
-            script {
-                def pom = readMavenPom file: 'pom.xml'
-                def version = pom.version
-                def parts = version.tokenize('.')
-                int patch = parts[2].toInteger() + 1
-                def newVersion = "${parts[0]}.${parts[1]}.${patch}"
-                sh "mvn versions:set -DnewVersion=${newVersion} -DgenerateBackupPoms=false"
+    stages {
+            stage('Version Bump') {
+                steps {
+                    script {
+                        def currentVersion = readMavenPom().getVersion()
+                        def newVersion = currentVersion.tokenize('.').collect{ it.toInteger() }
+                        newVersion[2]++
+                        def newVersionString = newVersion.join('.')
+                        sh "mvn versions:set -DnewVersion=${newVersionString} -DgenerateBackupPoms=false"
+                    }
+                }
             }
-        }
-    }
-
-    stage('Compile and package') {
-        steps {
-            sh 'mvn compile'
-            sh 'mvn package'
-        }
-    }
-
-    stage('Create artifact') {
-        steps {
-            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-        }
+            stage('Build') {
+                steps {
+                    sh 'mvn compile'
+                }
+            }
+            stage('Package') {
+                steps {
+                    sh 'mvn package'
+                }
+            }
+            stage('Create Artifact') {
+                steps {
+                    archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                }
+            }
     }
 
 }
