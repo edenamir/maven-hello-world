@@ -1,35 +1,28 @@
 pipeline {
     agent any
+    
     stages {
-        stage('Increment Version') {
+        stage('Set version') {
             steps {
-                script {
-                    def version = readMavenPom().getVersion()
-                    def parts = version.split("\\.")
-                    int patch = parts[2].toInteger() + 1
-                    String newVersion = "${parts[0]}.${parts[1]}.$patch"
-                    bat "mvn versions:set -DnewVersion=${newVersion} -DgenerateBackupPoms=false"
-                    bat "git commit -am \"Incremented version to ${newVersion}\""
-                }
+                bat 'powershell -Command "(Get-Content pom.xml).replace(\'<version>.*</version>\', \'<version>1.0.1</version>\') | Set-Content pom.xml"'
             }
         }
-
-        stage('Compile Code') {
+        stage('Compile code') {
             steps {
                 bat 'mvn compile'
             }
         }
-
-        stage('Package Artifact') {
+        stage('Package artifact') {
             steps {
                 bat 'mvn package'
             }
         }
-
-        stage('Archive Artifact') {
+        stage('Create artifact item') {
             steps {
-                archiveArtifacts 'target/*.jar'
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
     }
 }
+
+
