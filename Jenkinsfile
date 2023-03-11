@@ -1,8 +1,5 @@
 pipeline {
-    agent {
-        label 'windows'
-    }
-
+    agent any
     stages {
         stage('Increment Version') {
             steps {
