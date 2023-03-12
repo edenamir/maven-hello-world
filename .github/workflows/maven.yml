@@ -38,7 +38,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: my-artifact
-        path: myapp/target/myapp-1.0.0.jar.jar
+        path: myapp/target/myapp-1.0.0.jar
 
     #- name: Build with Maven
     #  run: |
