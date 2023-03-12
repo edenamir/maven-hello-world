@@ -21,6 +21,8 @@ jobs:
     
     - name: Maven Version Bump Action
       uses: nnichols/maven-version-bump-action@v3
+      with: 
+        pom-path: myapp/pom.xml
 
     - name: Build
       run: mvn clean compile
