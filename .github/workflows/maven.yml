@@ -28,7 +28,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Maven Version Bump Action
-      uses: nnichols/maven-version-bump-action@v3
+      uses: nnichols/maven-version-bump-action@v4
       with:
         new-version: '1.0.1'
         pom-path: myapp
