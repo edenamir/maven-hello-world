@@ -20,10 +20,7 @@ jobs:
         cache: maven
     
     - name: Maven Version Bump Action
-      uses: nnichols/maven-version-bump-action@v4
-
-        git commit -am "Update JAR version in pom.xml"
-        git push
+      uses: nnichols/maven-version-bump-action@v3
 
     - name: Build
       run: mvn clean compile
