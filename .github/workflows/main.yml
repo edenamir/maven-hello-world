@@ -9,6 +9,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+      with:
+        path: 'pom.xml'
 
     - name: Set up JDK
       uses: actions/setup-java@v2
