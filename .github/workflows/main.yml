@@ -10,7 +10,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       with:
-        path: 'pom.xml'
+        path: 'myapp/pom.xml'
 
     - name: Set up JDK
       uses: actions/setup-java@v2
