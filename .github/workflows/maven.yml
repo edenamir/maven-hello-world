@@ -30,7 +30,6 @@ jobs:
     - name: Maven Version Bump Action
       uses: nnichols/maven-version-bump-action@v4
       with:
-        new-version: '1.0.1'
         pom-path: myapp
     - name: Build with Maven
       run: |
