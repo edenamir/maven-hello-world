@@ -24,7 +24,7 @@ jobs:
 
     - name: Change JAR version in pom.xml
       run: |
-        xmlstarlet ed --inplace -u "/project/build/plugins/plugin[artifactId='maven-jar-plugin']/version" -v "1.0.0" pom.xml
+        xmlstarlet ed --inplace -u "/project/build/plugins/plugin[artifactId='maven-jar-plugin']/version" -v "1.0.0" myapp/pom.xml
         git commit -am "Update JAR version in pom.xml"
         git push
 
