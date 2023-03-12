@@ -27,14 +27,23 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name: Maven Version Bump Action
-      uses: nnichols/maven-version-bump-action@v4
+        
+    - name: Compile code
+      run: mvn -f myapp compile
+
+    - name: Package artifact
+      run: mvn -f myapp package
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
       with:
-        pom-path: myapp
-    - name: Build with Maven
-      run: |
-        cd myapp
-        ls -la
-        mvn -B package --file pom.xml
+        name: my-artifact
+        path: myapp/target/my-artifact.jar
+
+    #- name: Build with Maven
+    #  run: |
+    #    cd myapp
+    #    ls -la
+    #    mvn -B package --file pom.xml
       # patch
 
