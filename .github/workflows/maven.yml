@@ -36,5 +36,5 @@ jobs:
         cd myapp
         ls -la
         mvn -B package --file pom.xml
-      # test
+      # patch
 
