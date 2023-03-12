@@ -19,14 +19,14 @@ jobs:
         distribution: 'adopt'
         cache: maven
     
-    - name: Bump Version
-      id: bump
-      uses: nnichols/maven-version-bump-action@v3
-      with:
-        github-token: ${{ secrets.github_token }}
+    - name: Install XMLStarlet
+      run: sudo apt-get install xmlstarlet
 
-    - name: Print Version
-      run: "echo 'New Version: ${{steps.bump.outputs.version}}'"
+    - name: Change JAR version in pom.xml
+      run: |
+        xmlstarlet ed --inplace -u "/project/build/plugins/plugin[artifactId='maven-jar-plugin']/version" -v "1.0.0" pom.xml
+        git commit -am "Update JAR version in pom.xml"
+        git push
 
     - name: Build
       run: mvn clean compile
