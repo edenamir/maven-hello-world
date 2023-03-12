@@ -19,10 +19,16 @@ jobs:
         distribution: 'adopt'
         cache: maven
     
-    - name: Maven Version Bump Action
-      uses: nnichols/maven-version-bump-action@v3
-      with: 
-        pom-path: myapp
+    - name: Increase minor version
+      run: |
+        # Get the current version
+        version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+
+        # Increase the minor version by one
+        new_version=$(echo $version | awk -F. '{$NF = $NF + 1; OFS="."; print $0}')
+
+        # Update the POM file with the new version
+        mvn versions:set -DnewVersion=$new_version
 
     - name: Build
       run: mvn clean compile
