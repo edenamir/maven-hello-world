@@ -27,8 +27,8 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name: Maven Version Bump
-      uses: vishal-ceg/maven-version-bump-action@v1.0.2
+    - name: Maven Version Bump Action
+      uses: nnichols/maven-version-bump-action@v3
       with:
         new-version: '1.0.1'
         pom-path: myapp
