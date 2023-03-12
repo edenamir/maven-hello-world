@@ -19,12 +19,9 @@ jobs:
         distribution: 'adopt'
         cache: maven
     
-    - name: Install XMLStarlet
-      run: sudo apt-get install xmlstarlet
+    - name: Maven Version Bump Action
+      uses: nnichols/maven-version-bump-action@v4
 
-    - name: Change JAR version in pom.xml
-      run: |
-        xmlstarlet ed --inplace -u "/project/build/plugins/plugin[artifactId='maven-jar-plugin']/version" -v "1.0.0" myapp/pom.xml
         git commit -am "Update JAR version in pom.xml"
         git push
 
