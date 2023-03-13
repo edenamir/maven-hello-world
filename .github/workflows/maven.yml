@@ -48,13 +48,15 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    -
-      name: Build and push
+    - name: Build and push
       uses: docker/build-push-action@v4
       with:
         context: .
         push: true
-        tags: user/app:latest
+        tags: my-image:1.0.1
+    
+    - name: Download and run Docker image
+      run: docker run --rm my-image:1.0.1
 
 
     #- name: Build with Maven
