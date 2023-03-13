@@ -27,12 +27,13 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+        
     - name: Bump Version
       id: bump
       uses: nnichols/maven-version-bump-action@v3
       with:
         github-token: ${{ secrets.TOKEN }}
-        pom-path: myapp
+        pom-path: myapp/pom.xml
         
     - name: Compile code
       run: mvn -f myapp compile
@@ -45,6 +46,7 @@ jobs:
       with:
         name: my-artifact
         path: myapp/target/myapp-1.0.0.jar
+        
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
     - name: Set up Docker Buildx
