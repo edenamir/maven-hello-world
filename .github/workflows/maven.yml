@@ -55,8 +55,6 @@ jobs:
         push: true
         tags: my-image:1.0.1
     
-    - name: Download and run Docker image
-      run: docker run --rm my-image:1.0.1
 
 
     #- name: Build with Maven
