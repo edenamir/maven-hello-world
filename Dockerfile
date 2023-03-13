@@ -1,7 +1,7 @@
 FROM openjdk:11-jdk-slim
 
-ARG JAR_FILE=myapp/target
-COPY ${JAR_FILE} myapp-1.0.0.jar
+ARG JAR_FILE=myapp/target/myapp-1.0.0.jar
+COPY ${JAR_FILE} app.jar
 
 USER root
 RUN apt-get update && apt-get install -y sudo && \
