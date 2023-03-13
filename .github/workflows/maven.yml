@@ -27,6 +27,11 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+    - name: Bump Version
+      id: bump
+      uses: nnichols/maven-version-bump-action@v3
+      with:
+        github-token: ${{ secrets.TOKEN }}
         
     - name: Compile code
       run: mvn -f myapp compile
